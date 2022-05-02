@@ -1,0 +1,9 @@
+web_c200
+=====
+
+An OTP application
+
+Build
+-----
+
+    $ rebar3 compile

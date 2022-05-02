@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8"/>
+	<title>Websocket client</title>
+</head>
+
+<body>
+
+  <h1 >Välkommen till c200</h1>
+
+<button type="button" onclick="lamps_indoor_on();">Ute_kök_hallen Lampor PÅ</button>
+<button type="button" onclick="lamps_indoor_off();">Ute_kök_hallen Lampor AV</button>
+<div id="lamps_indoor_status"></div>
+<br>
+<button type="button" onclick="lamp_inglasad_on();">Inglasade Lampa PÅ</button>
+<button type="button" onclick="lamp_inglasad_off();">Inglasade Lampa AV</button>
+<div id="lamp_inglasad_status"></div>
+
+<script>
+     var ws = new WebSocket("ws://192.168.1.200:60200/please_upgrade_to_websocket"); 
+ /*  var ws = new WebSocket("ws://localhost:60201/please_upgrade_to_websocket"); */
+    ws.onerror = function(event) {
+        console.error("[ME]WebSocket error observed:", event);
+    };
+    ws.onclose = function(event) {
+        console.log("[ME]WebSocket is closed now.");
+    };
+
+
+  ws.onmessage = function (event) {
+      
+      console.log(event.data);
+      var str=event.data;
+      var arr=str.split(",");
+      
+      document.getElementById('lamps_indoor_status').innerHTML=arr[0];
+      document.getElementById('lamp_inglasad_status').innerHTML=arr[1];
+  };
+
+// Joqs own golden code
+
+  function lamp_inglasad_on(){
+				ws.send("lamp_inglasad_on");
+};
+  function lamp_inglasad_off(){
+				ws.send("lamp_inglasad_off");
+};
+  function lamps_indoor_on(){
+				ws.send("lamps_indoor_on");
+};
+  function lamps_indoor_off(){
+				ws.send("lamps_indoor_off");
+};
+   </script>
+
+
+</html>

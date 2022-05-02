@@ -1,0 +1,11 @@
+{application,web_c200,
+             [{description,"An OTP application"},
+              {vsn,"0.1.0"},
+              {registered,[]},
+              {mod,{web_c200_app,[]}},
+              {applications,[kernel,stdlib]},
+              {env,[]},
+              {modules,[no_matching_route_handler,web_c200_app,web_c200_sup,
+                        web_handler,web_init,web_server]},
+              {licenses,["Apache 2.0"]},
+              {links,[]}]}.
